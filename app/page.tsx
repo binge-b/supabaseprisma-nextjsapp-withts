@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link';
 import { PostType } from './types';
 
+// 全記事取得用APIたたく用関数
 async function fetchAllBlogs() {
   const res = await fetch(`http://localhost:3001/api/blog`,{
     cache: "no-store",
@@ -20,7 +21,7 @@ export default async function Home() {
   return (
     <main className="w-full h-full">
   <div className="md:w-2/4 sm:w-3/4 m-auto p-4 my-5 rounded-lg bg-blue-900 drop-shadow-xl">
-    <h1 className="text-slate-200 text-center text-2xl font-extrabold">
+    <h1 className="text-slate-900 text-center text-2xl font-extrabold">
       Portfolio
     </h1>
   </div>
@@ -30,7 +31,7 @@ export default async function Home() {
       href={"/blog/add"}
       className=" md:w-1/6 sm:w-2/4 text-center rounded-md p-2 m-auto bg-orange-200 font-semibold"
     >
-      ブログ新規作成
+      新規作成
     </Link>
   </div>
 
@@ -45,7 +46,7 @@ export default async function Home() {
         </div>
         <Link
           href={`/blog/edit/${post.id}`}
-          className="px-4 py-1 text-center text-xl bg-slate-900 rounded-md font-semibold text-slate-200"
+          className="px-4 py-1 text-center text-xl bg-slate-900 rounded-md font-semibold text-slate-800"
         >
           編集
         </Link>
