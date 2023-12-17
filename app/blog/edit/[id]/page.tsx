@@ -26,6 +26,18 @@ const getBlogById = async (id: number) => {
     return data.post;
 };
 
+// 削除用関数
+const deleteBlog = async (id: number) => {
+  const res = await fetch(`http://localhost:3001/api/blog/${id}`,{
+      method: "DELETE",
+      headers: {
+          "Content-Type": "application/json",
+      },
+  });
+  
+  return res.json();
+  };
+
 const EditPost = ({ params }: { params: { id: number }}) => {
     const router = useRouter();
     const titleRef = useRef<HTMLInputElement | null>(null);
@@ -42,6 +54,15 @@ const EditPost = ({ params }: { params: { id: number }}) => {
 
         router.push("/");
         router.refresh();
+    };
+
+    // なぜか削除できない件
+    const handleDelete = async () => {
+      toast.loading("削除中です・・・")
+      await deleteBlog(params.id);
+
+      router.push("/");
+      router.refresh();
     };
 
     useEffect(() => {
@@ -78,7 +99,9 @@ const EditPost = ({ params }: { params: { id: number }}) => {
         <button className="font-semibold px-4 py-2 shadow-xl bg-slate-200 rounded-lg m-auto hover:bg-slate-100">
           更新
         </button>
-        <button className="ml-2 font-semibold px-4 py-2 shadow-xl bg-red-400 rounded-lg m-auto hover:bg-slate-100">
+        <button
+        onClick={handleDelete}
+        className="ml-2 font-semibold px-4 py-2 shadow-xl bg-red-400 rounded-lg m-auto hover:bg-slate-100">
           削除
         </button>
       </form>
