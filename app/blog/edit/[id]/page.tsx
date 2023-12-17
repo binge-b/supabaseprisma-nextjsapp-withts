@@ -56,7 +56,6 @@ const EditPost = ({ params }: { params: { id: number }}) => {
         router.refresh();
     };
 
-    // なぜか削除できない件
     const handleDelete = async () => {
       toast.loading("削除中です・・・")
       await deleteBlog(params.id);
@@ -112,3 +111,24 @@ const EditPost = ({ params }: { params: { id: number }}) => {
 }
 
 export default EditPost;
+
+// 画像アップロード用のモデルを定義
+// interface Image {
+//   id: number;
+//   url: string;
+//   alt: string;
+// }
+
+// 画像をアップロードする関数
+// const uploadImage = async (file: File): Promise<Image> => {
+//   const formData = new FormData();
+//   formData.append('image', file);
+
+//   const res = await fetch('http://localhost:3001/api/upload', {
+//     method: 'POST',
+//     body: formData,
+//   });
+
+//   const data = await res.json();
+//   return data;
+// };
